@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import WeatherSection from "./components/WeatherSection/WeatherSection.js";
 
 class App extends Component {
   render() {
@@ -16,7 +17,7 @@ class App extends Component {
 
           <div className="uk-text-center uk-grid">
             <div className="uk-width-1-3@m">
-              <div className="uk-card uk-card-default uk-card-body">1-3</div>
+              <WeatherSection />
             </div>
           </div>
         </div>
