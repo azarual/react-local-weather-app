@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import WeatherHeader from "../WeatherHeader/WeatherHeader.js";
+// import styles from "./styles.css.js";
 
 class WeatherSection extends Component {
   render() {
-    return <div className="uk-card uk-card-default uk-card-body">1-3</div>;
+    return (
+      <div className="uk-card uk-card-secondary uk-box-shadow-large">
+        <WeatherHeader />
+      </div>
+    );
   }
 }
 

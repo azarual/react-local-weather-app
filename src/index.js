@@ -5,7 +5,7 @@ import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import UIkit from "uikit";
 import Icons from "uikit/dist/js/uikit-icons";
-import uikitCss from "uikit/dist/css/uikit.css";
+import "uikit/dist/css/uikit.css";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 registerServiceWorker();

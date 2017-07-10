@@ -6,12 +6,12 @@ import WeatherSection from "./components/WeatherSection/WeatherSection.js";
 class App extends Component {
   render() {
     return (
-      <div className="uk-section uk-section-muted container--main">
+      <div className="uk-section uk-light container--main">
         <div className="uk-container">
           <h3>
             <span>
               <img className="App-logo" src={logo} alt="Logo" />
-            </span>{" "}
+            </span>
             Local Weather React App
           </h3>
 
