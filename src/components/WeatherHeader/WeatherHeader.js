@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Skycons from "react-skycons";
 import styles from "./styles.css.js";
+import PropTypes from "prop-types";
 
 class WeatherHeader extends Component {
   render() {
@@ -26,7 +27,9 @@ class WeatherHeader extends Component {
                 />
               </span>
               <div id="current-temp-container">
-                <h2>21°C</h2>
+                <h2>
+                  {this.props.temperature}°C
+                </h2>
               </div>
               <p id="current-date">Monday Jul 10th</p>
             </div>
@@ -37,5 +40,9 @@ class WeatherHeader extends Component {
     );
   }
 }
+
+WeatherHeader.propTypes = {
+  temperature: PropTypes.number.isRequired
+};
 
 export default WeatherHeader;

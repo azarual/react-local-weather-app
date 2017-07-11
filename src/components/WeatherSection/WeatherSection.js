@@ -6,7 +6,7 @@ class WeatherSection extends Component {
   render() {
     return (
       <div className="uk-card uk-card-secondary uk-box-shadow-large">
-        <WeatherHeader />
+        <WeatherHeader temperature={21} />
       </div>
     );
   }
