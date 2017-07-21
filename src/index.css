@@ -11,6 +11,7 @@ body,
 }
 
 .container--main {
+  min-height: 100%;
   background: #181818;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -24,6 +25,18 @@ h6 {
   font-weight: 300;
 }
 
-.weather-icons {
-  min-width: 64px;
+.card__container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-credits {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(https://res.cloudinary.com/da8t1tjca/image/upload/v1497453015/lightning-storm-weather-sky-53459_xrf0ej.jpg);
+}
+
+.section-credits p span {
+  margin: 0 15px;
 }

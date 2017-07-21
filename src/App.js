@@ -6,6 +6,8 @@ import { getPosition } from "./helpers/get-position.js";
 import axios from "axios";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import Footer from "./components/Footer/Footer.js";
+import Credits from "./components/Credits/Credits.js";
 
 const geoOptions = {
   enableHighAccuracy: true,
@@ -76,21 +78,25 @@ class App extends Component {
   render() {
     const isReady = this.state.isReady;
     return isReady
-      ? <div className="uk-section uk-light container--main">
-          <div className="uk-container uk-container-small">
-            <div className="uk-width-1-2@s uk-box-shadow-large uk-padding-remove">
-              <WeatherSection
-                forecastCurrent={
-                  JSON.parse(sessionStorage.weatherCache).data.currently
-                }
-              />
-              <ForecastSection
-                forecastWeek={
-                  JSON.parse(sessionStorage.weatherCache).data.daily
-                }
-              />
+      ? <div>
+          <div className="uk-section uk-light container--main">
+            <div className="uk-container uk-container-small card__container">
+              <div className="uk-width-1-2@s uk-box-shadow-large uk-padding-remove">
+                <WeatherSection
+                  forecastCurrent={
+                    JSON.parse(sessionStorage.weatherCache).data.currently
+                  }
+                />
+                <ForecastSection
+                  forecastWeek={
+                    JSON.parse(sessionStorage.weatherCache).data.daily
+                  }
+                />
+              </div>
             </div>
           </div>
+          <Credits />
+          <Footer />
         </div>
       : <div className="uk-section uk-light container--main">
           <div className="uk-position-cover uk-overlay uk-overlay-primary uk-flex uk-flex-center uk-flex-middle">

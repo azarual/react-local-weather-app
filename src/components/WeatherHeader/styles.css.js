@@ -1,5 +1,5 @@
 export default {
   canvasSize: {
-    height: "100px"
+    maxWidth: "350px"
   }
 };
