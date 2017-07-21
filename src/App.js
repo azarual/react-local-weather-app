@@ -3,6 +3,8 @@ import "./App.css";
 import WeatherSection from "./components/WeatherSection/WeatherSection.js";
 import { getPosition } from "./helpers/get-position.js";
 import axios from "axios";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 const geoOptions = {
   enableHighAccuracy: true,
@@ -23,6 +25,7 @@ class App extends Component {
     function composeRequest(key, lat, long) {
       return `https://crossorigin.me/https://api.darksky.net/forecast/${key}/${lat},${long}?units=si`;
     }
+    NProgress.start();
     if (!sessionStorage.getItem("weatherCache")) {
       console.log("No data is stored locally. Making request to darksky...");
       getPosition(geoOptions)
@@ -51,6 +54,7 @@ class App extends Component {
                 this.setState({
                   isReady: true
                 });
+                NProgress.done();
               }
             })
             .catch(error => {
@@ -65,6 +69,7 @@ class App extends Component {
       this.setState({
         isReady: true
       });
+      NProgress.done();
     }
   }
   render() {
@@ -83,7 +88,12 @@ class App extends Component {
             </div>
           </div>
         </div>
-      : <p>Loading</p>;
+      : <div className="uk-section uk-light container--main">
+          <div className="uk-position-cover uk-overlay uk-overlay-primary uk-flex uk-flex-center uk-flex-middle">
+            <p>Loading...</p>
+            <div data-uk-spinner />
+          </div>
+        </div>;
   }
 }
 
