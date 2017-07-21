@@ -16,64 +16,68 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isReady: false,
-      coords: {
-        lat: "Loading",
-        long: "Loading"
-      },
-      weather: null
+      isReady: false
     };
   }
   componentDidMount() {
     function composeRequest(key, lat, long) {
       return `https://crossorigin.me/https://api.darksky.net/forecast/${key}/${lat},${long}?units=si`;
     }
-    getPosition(geoOptions)
-      .then(result => {
-        // console.log(result);
-        this.setState({
-          coords: {
-            lat: result.coords.latitude,
-            long: result.coords.longitude
-          }
-        });
-        // console.log(result.coords);
-        return result.coords;
-      })
-      .then(result => {
-        axios
-          .get(composeRequest(KEY, result.latitude, result.longitude))
-          .then(responseData => {
-            this.setState({
-              weather: responseData
-            });
-            console.log(responseData.data);
-            return responseData.data;
-          })
-          .catch(error => {
-            console.log(error);
+    if (!sessionStorage.getItem("weatherCache")) {
+      console.log("No data is stored locally. Making request to darksky...");
+      getPosition(geoOptions)
+        .then(result => {
+          this.setState({
+            coords: {
+              lat: result.coords.latitude,
+              long: result.coords.longitude
+            }
           });
-        // console.log(result);
-        // return result;
-      })
-      .then(
-        this.setState({
-          isReady: true
+          return result.coords;
         })
-      )
-      .catch(err => {
-        console.error(err.message);
+        .then(result => {
+          axios
+            .get(composeRequest(KEY, result.latitude, result.longitude))
+            .then(responseData => {
+              this.setState({
+                weather: responseData
+              });
+              sessionStorage.setItem(
+                "weatherCache",
+                JSON.stringify(responseData)
+              );
+              if (JSON.parse(sessionStorage.weatherCache)) {
+                console.log("Response with weather data cached succesfully");
+                this.setState({
+                  isReady: true
+                });
+              }
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        })
+        .catch(err => {
+          console.error(err.message);
+        });
+    } else {
+      console.log("Weather data is already stored locally");
+      this.setState({
+        isReady: true
       });
+    }
   }
   render() {
-    const isReady = this.state.weather;
+    const isReady = this.state.isReady;
     return isReady
       ? <div className="uk-section uk-light container--main">
           <div className="uk-container">
             <div className="uk-text-center uk-grid">
               <div className="uk-width-1-3@m">
                 <WeatherSection
-                  forecastCurrent={this.state.weather.data.currently}
+                  forecastCurrent={
+                    JSON.parse(sessionStorage.weatherCache).data.currently
+                  }
                 />
               </div>
             </div>

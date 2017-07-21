@@ -14,9 +14,6 @@ class WeatherSection extends Component {
       currentIcon: skyconify(this.props.forecastCurrent.icon)
     };
   }
-  componentDidMount() {
-    console.log(this.state.currentIcon);
-  }
   render() {
     const isReady = this.state.currentIcon !== undefined;
     return isReady
