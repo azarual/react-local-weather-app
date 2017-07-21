@@ -77,16 +77,18 @@ class App extends Component {
     const isReady = this.state.isReady;
     return isReady
       ? <div className="uk-section uk-light container--main">
-          <div className="uk-container">
-            <div className="uk-text-center uk-grid">
-              <div className="uk-width-1-3@m uk-box-shadow-large uk-padding-remove">
-                <WeatherSection
-                  forecastCurrent={
-                    JSON.parse(sessionStorage.weatherCache).data.currently
-                  }
-                />
-                <ForecastSection />
-              </div>
+          <div className="uk-container uk-container-small">
+            <div className="uk-width-1-2@s uk-box-shadow-large uk-padding-remove">
+              <WeatherSection
+                forecastCurrent={
+                  JSON.parse(sessionStorage.weatherCache).data.currently
+                }
+              />
+              <ForecastSection
+                forecastWeek={
+                  JSON.parse(sessionStorage.weatherCache).data.daily
+                }
+              />
             </div>
           </div>
         </div>
