@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import WeatherSection from "./components/WeatherSection/WeatherSection.js";
+import ForecastSection from "./components/ForecastSection/ForecastSection.js";
 import { getPosition } from "./helpers/get-position.js";
 import axios from "axios";
 import NProgress from "nprogress";
@@ -78,12 +79,13 @@ class App extends Component {
       ? <div className="uk-section uk-light container--main">
           <div className="uk-container">
             <div className="uk-text-center uk-grid">
-              <div className="uk-width-1-3@m">
+              <div className="uk-width-1-3@m uk-box-shadow-large uk-padding-remove">
                 <WeatherSection
                   forecastCurrent={
                     JSON.parse(sessionStorage.weatherCache).data.currently
                   }
                 />
+                <ForecastSection />
               </div>
             </div>
           </div>
@@ -91,7 +93,6 @@ class App extends Component {
       : <div className="uk-section uk-light container--main">
           <div className="uk-position-cover uk-overlay uk-overlay-primary uk-flex uk-flex-center uk-flex-middle">
             <p>Loading...</p>
-            <div data-uk-spinner />
           </div>
         </div>;
   }

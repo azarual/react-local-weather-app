@@ -17,7 +17,7 @@ class WeatherSection extends Component {
   render() {
     const isReady = this.state.currentIcon !== undefined;
     return isReady
-      ? <div className="uk-card uk-card-secondary uk-box-shadow-large">
+      ? <div className="uk-card uk-card-secondary">
           <WeatherHeader
             temperature={this.state.currentWeather}
             dateTime={this.state.currentDate}
