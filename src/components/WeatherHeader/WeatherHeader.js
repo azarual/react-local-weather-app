@@ -23,7 +23,7 @@ class WeatherHeader extends Component {
                 <span>
                   <Skycons
                     color="white"
-                    icon="CLEAR_DAY"
+                    icon={this.props.icon}
                     style={styles.canvasSize}
                   />
                 </span>
@@ -32,7 +32,9 @@ class WeatherHeader extends Component {
                     {this.props.temperature}°C
                   </h2>
                 </div>
-                <p id="current-date">Monday Jul 10th</p>
+                <p id="current-date">
+                  {this.props.dateTime}
+                </p>
               </div>
               <div className="uk-spinner" data-uk-spinner />
             </div>
@@ -44,7 +46,9 @@ class WeatherHeader extends Component {
 }
 
 WeatherHeader.propTypes = {
-  temperature: PropTypes.number.isRequired
+  temperature: PropTypes.number.isRequired,
+  dateTime: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired
 };
 
 export default WeatherHeader;

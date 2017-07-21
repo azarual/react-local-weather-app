@@ -1,22 +1,33 @@
 import React, { Component } from "react";
 import WeatherHeader from "../WeatherHeader/WeatherHeader.js";
-// import styles from "./styles.css.js";
-// import axios from "axios";
+import { skyconify } from "../../helpers/skycons-helper.js";
+import moment from "moment";
 
 class WeatherSection extends Component {
-  componentDidMount() {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentWeather: Math.round(this.props.forecastCurrent.temperature),
+      currentDate: moment
+        .unix(this.props.forecastCurrent.time)
+        .format("dddd MMM Do"),
+      currentIcon: skyconify(this.props.forecastCurrent.icon)
+    };
+  }
+  componentDidMount() {
+    console.log(this.state.currentIcon);
+  }
   render() {
-    return (
-      <div className="uk-card uk-card-secondary uk-box-shadow-large">
-        <WeatherHeader temperature={21} />
-        <p>
-          {this.props.lat}
-        </p>
-        <p>
-          {this.props.long}
-        </p>
-      </div>
-    );
+    const isReady = this.state.currentIcon !== undefined;
+    return isReady
+      ? <div className="uk-card uk-card-secondary uk-box-shadow-large">
+          <WeatherHeader
+            temperature={this.state.currentWeather}
+            dateTime={this.state.currentDate}
+            icon={this.state.currentIcon}
+          />
+        </div>
+      : <p>Loading</p>;
   }
 }
 
