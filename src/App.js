@@ -35,17 +35,22 @@ class App extends Component {
     return (
       <div className="uk-section uk-light container--main">
         <div className="uk-container">
-          <div className="uk-text-center uk-grid">
-            <div className="uk-width-1-3@m">
-              {this.state.isReady
-                ? <WeatherSection
+          {this.state.isReady
+            ? <div className="uk-text-center uk-grid">
+                <div className="uk-width-1-3@m">
+                  <WeatherSection
                     loading={this.state.isReady}
                     lat={this.state.coords.lat}
                     long={this.state.coords.long}
                   />
-                : <p>Loading</p>}
-            </div>
-          </div>
+                </div>
+              </div>
+            : <div className="uk-overlay-primary uk-position-cover">
+                <div className="uk-position-center">
+                  {/* <div className="uk-spinner" data-uk-spinner /> */}
+                  <p>Loading</p>
+                </div>
+              </div>}
         </div>
       </div>
     );
