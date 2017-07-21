@@ -1,47 +1,49 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import WeatherSection from "./components/WeatherSection/WeatherSection.js";
-import { getData } from "./helpers/get-position.js";
+import { getPosition } from "./helpers/get-position.js";
+
+const geoOptions = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
-    getData();
     this.state = {
       isReady: false
     };
   }
   componentDidMount() {
-    if (sessionStorage.coordinates !== "") {
-      this.setState({
-        isReady: true,
-        userPosition: {
-          lat: JSON.parse(sessionStorage.coordinates).lat,
-          long: JSON.parse(sessionStorage.coordinates).long
-        }
+    getPosition(geoOptions)
+      .then(result => {
+        this.setState({
+          isReady: true,
+          coords: {
+            lat: result.coords.latitude,
+            long: result.coords.longitude
+          }
+        });
+      })
+      .catch(err => {
+        console.error(err.message);
       });
-    }
   }
   render() {
     return (
       <div className="uk-section uk-light container--main">
         <div className="uk-container">
-          <h3>
-            <span>
-              <img className="App-logo" src={logo} alt="Logo" />
-            </span>
-            Local Weather React App
-          </h3>
-
           <div className="uk-text-center uk-grid">
             <div className="uk-width-1-3@m">
-              {this.state.isReady &&
-                <WeatherSection
-                  loading={this.state.isReady}
-                  lat={this.state.userPosition.lat}
-                  long={this.state.userPosition.long}
-                />}
+              {this.state.isReady
+                ? <WeatherSection
+                    loading={this.state.isReady}
+                    lat={this.state.coords.lat}
+                    long={this.state.coords.long}
+                  />
+                : <p>Loading</p>}
             </div>
           </div>
         </div>
