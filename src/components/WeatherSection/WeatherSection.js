@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import WeatherHeader from "../WeatherHeader/WeatherHeader.js";
-import { skyconify } from "../../helpers/skycons-helper.js";
 import moment from "moment";
 
 class WeatherSection extends Component {
@@ -11,7 +10,7 @@ class WeatherSection extends Component {
       currentDate: moment
         .unix(this.props.forecastCurrent.time)
         .format("dddd MMM Do"),
-      currentIcon: skyconify(this.props.forecastCurrent.icon)
+      currentIcon: this.props.forecastCurrent.icon
     };
   }
   render() {
