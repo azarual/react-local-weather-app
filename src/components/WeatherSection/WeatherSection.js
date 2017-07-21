@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import WeatherHeader from "../WeatherHeader/WeatherHeader.js";
 import moment from "moment";
+import PropTypes from "prop-types";
 
 class WeatherSection extends Component {
   constructor(props) {
@@ -26,5 +27,9 @@ class WeatherSection extends Component {
       : <p>Loading</p>;
   }
 }
+
+WeatherSection.propTypes = {
+  forecastCurrent: PropTypes.object.isRequired
+};
 
 export default WeatherSection;
